@@ -40,6 +40,7 @@
             this.buttonOdszyfruj = new System.Windows.Forms.Button();
             this.checkBoxPolski = new System.Windows.Forms.CheckBox();
             this.textBoxCiąg = new System.Windows.Forms.TextBox();
+            this.checkBoxMałe = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // buttonZaszyfruj
@@ -56,7 +57,7 @@
             // 
             this.checkBoxSpacja.AutoSize = true;
             this.checkBoxSpacja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.checkBoxSpacja.Location = new System.Drawing.Point(362, 154);
+            this.checkBoxSpacja.Location = new System.Drawing.Point(362, 158);
             this.checkBoxSpacja.Name = "checkBoxSpacja";
             this.checkBoxSpacja.Size = new System.Drawing.Size(109, 44);
             this.checkBoxSpacja.TabIndex = 2;
@@ -97,15 +98,15 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.label2.Location = new System.Drawing.Point(7, 248);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(470, 26);
+            this.label2.Size = new System.Drawing.Size(330, 26);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Twoja zaszyfrowana/odszyfrowana wiadomość:";
+            this.label2.Text = "Twoja zaszyfrowana wiadomość:";
             // 
             // textBoxWyjście
             // 
             this.textBoxWyjście.Location = new System.Drawing.Point(12, 277);
             this.textBoxWyjście.Name = "textBoxWyjście";
-            this.textBoxWyjście.Size = new System.Drawing.Size(459, 20);
+            this.textBoxWyjście.Size = new System.Drawing.Size(325, 20);
             this.textBoxWyjście.TabIndex = 7;
             // 
             // label3
@@ -139,7 +140,7 @@
             // 
             this.checkBoxPolski.AutoSize = true;
             this.checkBoxPolski.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.checkBoxPolski.Location = new System.Drawing.Point(362, 204);
+            this.checkBoxPolski.Location = new System.Drawing.Point(362, 208);
             this.checkBoxPolski.Name = "checkBoxPolski";
             this.checkBoxPolski.Size = new System.Drawing.Size(109, 44);
             this.checkBoxPolski.TabIndex = 11;
@@ -156,11 +157,24 @@
             this.textBoxCiąg.Size = new System.Drawing.Size(258, 46);
             this.textBoxCiąg.TabIndex = 12;
             // 
+            // checkBoxMałe
+            // 
+            this.checkBoxMałe.AutoSize = true;
+            this.checkBoxMałe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.checkBoxMałe.Location = new System.Drawing.Point(361, 260);
+            this.checkBoxMałe.Name = "checkBoxMałe";
+            this.checkBoxMałe.Size = new System.Drawing.Size(109, 44);
+            this.checkBoxMałe.TabIndex = 13;
+            this.checkBoxMałe.Text = "Uwzględnij\r\nmałe\r\n";
+            this.checkBoxMałe.UseVisualStyleBackColor = true;
+            this.checkBoxMałe.CheckedChanged += new System.EventHandler(this.checkBoxMałe_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 318);
+            this.Controls.Add(this.checkBoxMałe);
             this.Controls.Add(this.textBoxCiąg);
             this.Controls.Add(this.checkBoxPolski);
             this.Controls.Add(this.buttonOdszyfruj);
@@ -195,6 +209,7 @@
         private System.Windows.Forms.Button buttonOdszyfruj;
         private System.Windows.Forms.CheckBox checkBoxPolski;
         private System.Windows.Forms.TextBox textBoxCiąg;
+        private System.Windows.Forms.CheckBox checkBoxMałe;
     }
 }
 

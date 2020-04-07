@@ -21,14 +21,19 @@ namespace Program
         }
 
         List<char> znaki = new List<char>();
-        List<char> polskie = new List<char> { 'ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ź', 'ż', 'Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż' };
+        List<char> małe = new List<char>();
+
+        List<char> małe_polskie = new List<char> { 'ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ź', 'ż' };
+        List<char> duże_polskie = new List<char> { 'Ą', 'Ć', 'Ę', 'Ł', 'Ń', 'Ó', 'Ś', 'Ź', 'Ż' };
+
         bool JestSpacja { get; set; }
         bool SąPolskie { get; set; }
+        bool SąMałe { get; set; }
 
         private void ZaładujZnaki()
         {
             for (int i = 97; i <= 122; i++)
-                znaki.Add((char)i);
+                małe.Add((char)i);
 
             for (int i = 65; i <= 90; i++)
                 znaki.Add((char)i);
@@ -52,11 +57,15 @@ namespace Program
                 StringBuilder builder = new StringBuilder(textBoxWejście.Text);
                 int klucz = Int32.Parse(textBoxKlucz.Text);
 
-                for (int i = 0; i < builder.Length && klucz < znaki.Count; i++)
+                for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
                 {
-                    int nowyindex = znaki.IndexOf(builder[i]) + klucz;
-                    if (nowyindex >= znaki.Count) builder[i] = znaki[nowyindex - znaki.Count];
-                    else builder[i] = znaki[nowyindex];
+                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) &&
+                        (!małe.Contains(builder[i]) || SąMałe) && (!małe_polskie.Contains(builder[i]) || (SąPolskie && SąMałe)))
+                    {
+                        int nowyindex = znaki.IndexOf(builder[i]) + klucz;
+                        if (nowyindex >= znaki.Count) builder[i] = znaki[nowyindex - znaki.Count];
+                        else builder[i] = znaki[nowyindex];
+                    }
                 }
 
                 textBoxWyjście.Text = builder.ToString();
@@ -74,11 +83,15 @@ namespace Program
                 StringBuilder builder = new StringBuilder(textBoxWejście.Text);
                 int klucz = Int32.Parse(textBoxKlucz.Text);
 
-                for (int i = 0; i < builder.Length && klucz < znaki.Count; i++)
+                for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
                 {
-                    int nowyindex = znaki.IndexOf(builder[i]) - klucz;
-                    if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
-                    else builder[i] = znaki[nowyindex];
+                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) && 
+                        (!małe.Contains(builder[i]) || SąMałe) && (małe_polskie.Contains(builder[i])) || (SąPolskie && SąMałe))
+                    {
+                        int nowyindex = znaki.IndexOf(builder[i]) - klucz;
+                        if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
+                        else builder[i] = znaki[nowyindex];
+                    }
                 }
 
                 textBoxWyjście.Text = builder.ToString();
@@ -99,10 +112,46 @@ namespace Program
 
         private void checkBoxPolski_CheckedChanged(object sender, EventArgs e)
         {
-            if (!SąPolskie) znaki.AddRange(polskie);
-            else znaki.RemoveRange(znaki.IndexOf(polskie[0]), polskie.Count);
+            //if (!SąPolskie) znaki.AddRange(polskie);
+            //else znaki.RemoveRange(znaki.IndexOf(polskie[0]), polskie.Count);
+            //textBoxCiąg.Text = AktualizujZnaki();
+            //SąPolskie = !SąPolskie;
+
+            if (!SąPolskie)
+            {
+                znaki.AddRange(duże_polskie);
+                if (SąMałe) znaki.AddRange(małe_polskie);
+            }
+            else
+            {
+                znaki.RemoveRange(znaki.IndexOf(duże_polskie[0]), duże_polskie.Count);
+                if (SąMałe) znaki.RemoveRange(znaki.IndexOf(małe_polskie[0]), małe_polskie.Count);
+            }
+
             textBoxCiąg.Text = AktualizujZnaki();
             SąPolskie = !SąPolskie;
+        }
+
+        private void checkBoxMałe_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (!SąMałe) znaki.AddRange(małe);
+            //else znaki.RemoveRange(znaki.IndexOf(małe[0]), małe.Count);
+            //textBoxCiąg.Text = AktualizujZnaki();
+            //SąMałe = !SąMałe;
+
+            if (!SąMałe)
+            {
+                znaki.AddRange(małe);
+                if(SąPolskie) znaki.AddRange(małe_polskie);
+            }
+            else
+            {
+                znaki.RemoveRange(znaki.IndexOf(małe[0]), małe.Count);
+                if (SąPolskie) znaki.RemoveRange(znaki.IndexOf(małe_polskie[0]), małe_polskie.Count);
+            }
+
+            textBoxCiąg.Text = AktualizujZnaki();
+            SąMałe = !SąMałe;
         }
     }
 }
