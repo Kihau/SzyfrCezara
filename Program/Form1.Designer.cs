@@ -41,6 +41,8 @@
             this.checkBoxPolski = new System.Windows.Forms.CheckBox();
             this.textBoxCiąg = new System.Windows.Forms.TextBox();
             this.checkBoxMałe = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxZnakiIlość = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonZaszyfruj
@@ -69,7 +71,7 @@
             // 
             this.labelZnaki.AutoSize = true;
             this.labelZnaki.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.labelZnaki.Location = new System.Drawing.Point(114, 9);
+            this.labelZnaki.Location = new System.Drawing.Point(38, 9);
             this.labelZnaki.Name = "labelZnaki";
             this.labelZnaki.Size = new System.Drawing.Size(254, 26);
             this.labelZnaki.TabIndex = 3;
@@ -150,7 +152,7 @@
             // 
             // textBoxCiąg
             // 
-            this.textBoxCiąg.Location = new System.Drawing.Point(110, 38);
+            this.textBoxCiąg.Location = new System.Drawing.Point(34, 38);
             this.textBoxCiąg.Multiline = true;
             this.textBoxCiąg.Name = "textBoxCiąg";
             this.textBoxCiąg.ReadOnly = true;
@@ -169,11 +171,35 @@
             this.checkBoxMałe.UseVisualStyleBackColor = true;
             this.checkBoxMałe.CheckedChanged += new System.EventHandler(this.checkBoxMałe_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.label4.Location = new System.Drawing.Point(314, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 52);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Ilość\r\nznaków:\r\n";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxZnakiIlość
+            // 
+            this.textBoxZnakiIlość.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.textBoxZnakiIlość.Location = new System.Drawing.Point(412, 31);
+            this.textBoxZnakiIlość.Multiline = true;
+            this.textBoxZnakiIlość.Name = "textBoxZnakiIlość";
+            this.textBoxZnakiIlość.ReadOnly = true;
+            this.textBoxZnakiIlość.Size = new System.Drawing.Size(58, 39);
+            this.textBoxZnakiIlość.TabIndex = 15;
+            this.textBoxZnakiIlość.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 318);
+            this.Controls.Add(this.textBoxZnakiIlość);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBoxMałe);
             this.Controls.Add(this.textBoxCiąg);
             this.Controls.Add(this.checkBoxPolski);
@@ -210,6 +236,8 @@
         private System.Windows.Forms.CheckBox checkBoxPolski;
         private System.Windows.Forms.TextBox textBoxCiąg;
         private System.Windows.Forms.CheckBox checkBoxMałe;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxZnakiIlość;
     }
 }
 

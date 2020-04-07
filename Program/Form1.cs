@@ -41,6 +41,8 @@ namespace Program
 
         private string AktualizujZnaki()
         {
+            textBoxZnakiIlość.Text = znaki.Count.ToString();
+
             string napis = "";
 
             foreach (char c in znaki)
@@ -85,8 +87,8 @@ namespace Program
 
                 for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
                 {
-                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) && 
-                        (!małe.Contains(builder[i]) || SąMałe) && (małe_polskie.Contains(builder[i])) || (SąPolskie && SąMałe))
+                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) &&
+                        (!małe.Contains(builder[i]) || SąMałe) && (!małe_polskie.Contains(builder[i]) || (SąPolskie && SąMałe)))
                     {
                         int nowyindex = znaki.IndexOf(builder[i]) - klucz;
                         if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
@@ -112,11 +114,6 @@ namespace Program
 
         private void checkBoxPolski_CheckedChanged(object sender, EventArgs e)
         {
-            //if (!SąPolskie) znaki.AddRange(polskie);
-            //else znaki.RemoveRange(znaki.IndexOf(polskie[0]), polskie.Count);
-            //textBoxCiąg.Text = AktualizujZnaki();
-            //SąPolskie = !SąPolskie;
-
             if (!SąPolskie)
             {
                 znaki.AddRange(duże_polskie);
@@ -134,20 +131,15 @@ namespace Program
 
         private void checkBoxMałe_CheckedChanged(object sender, EventArgs e)
         {
-            //if (!SąMałe) znaki.AddRange(małe);
-            //else znaki.RemoveRange(znaki.IndexOf(małe[0]), małe.Count);
-            //textBoxCiąg.Text = AktualizujZnaki();
-            //SąMałe = !SąMałe;
-
             if (!SąMałe)
             {
-                znaki.AddRange(małe);
                 if(SąPolskie) znaki.AddRange(małe_polskie);
+                znaki.AddRange(małe);
             }
             else
             {
-                znaki.RemoveRange(znaki.IndexOf(małe[0]), małe.Count);
                 if (SąPolskie) znaki.RemoveRange(znaki.IndexOf(małe_polskie[0]), małe_polskie.Count);
+                znaki.RemoveRange(znaki.IndexOf(małe[0]), małe.Count);
             }
 
             textBoxCiąg.Text = AktualizujZnaki();
