@@ -61,8 +61,7 @@ namespace Program
 
                 for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
                 {
-                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) &&
-                        (!małe.Contains(builder[i]) || SąMałe) && (!małe_polskie.Contains(builder[i]) || (SąPolskie && SąMałe)))
+                    if (znaki.Contains(builder[i]))
                     {
                         int nowyindex = znaki.IndexOf(builder[i]) + klucz;
                         if (nowyindex >= znaki.Count) builder[i] = znaki[nowyindex - znaki.Count];
@@ -87,8 +86,7 @@ namespace Program
 
                 for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
                 {
-                    if ((builder[i] != ' ' || JestSpacja) && (!duże_polskie.Contains(builder[i]) || SąPolskie) &&
-                        (!małe.Contains(builder[i]) || SąMałe) && (!małe_polskie.Contains(builder[i]) || (SąPolskie && SąMałe)))
+                    if (znaki.Contains(builder[i]))
                     {
                         int nowyindex = znaki.IndexOf(builder[i]) - klucz;
                         if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
