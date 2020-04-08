@@ -54,52 +54,56 @@ namespace Program
 
         private void buttonZaszyfruj_Click(object sender, EventArgs e)
         {
-            try
-            {
-                StringBuilder builder = new StringBuilder(textBoxWejście.Text);
-                int klucz = Int32.Parse(textBoxKlucz.Text);
-
-                for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
-                {
-                    if (znaki.Contains(builder[i]))
-                    {
-                        int nowyindex = znaki.IndexOf(builder[i]) + klucz;
-                        if (nowyindex >= znaki.Count) builder[i] = znaki[nowyindex - znaki.Count];
-                        else builder[i] = znaki[nowyindex];
-                    }
-                }
-
-                textBoxWyjście.Text = builder.ToString();
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("Wprowadzono niepoprawne dane!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            SzyfrCezara(Szyfruj);
         }
 
         private void buttonOdszyfruj_Click(object sender, EventArgs e)
         {
+            SzyfrCezara(Odszyfruj);
+        }
+
+        delegate string Wykonaj(StringBuilder builder, int klucz);
+
+        private void SzyfrCezara(Wykonaj wykonaj)
+        {
             try
             {
-                StringBuilder builder = new StringBuilder(textBoxWejście.Text);
-                int klucz = Int32.Parse(textBoxKlucz.Text);
-
-                for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
-                {
-                    if (znaki.Contains(builder[i]))
-                    {
-                        int nowyindex = znaki.IndexOf(builder[i]) - klucz;
-                        if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
-                        else builder[i] = znaki[nowyindex];
-                    }
-                }
-
-                textBoxWyjście.Text = builder.ToString();
+                textBoxWyjście.Text = wykonaj(new StringBuilder(textBoxWejście.Text), Int32.Parse(textBoxKlucz.Text));
             }
             catch (Exception)
             {
                 MessageBox.Show("Wprowadzono niepoprawne dane!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string Szyfruj(StringBuilder builder, int klucz)
+        {
+            for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
+            {
+                if (znaki.Contains(builder[i]))
+                {
+                    int nowyindex = znaki.IndexOf(builder[i]) + klucz;
+                    if (nowyindex >= znaki.Count) builder[i] = znaki[nowyindex - znaki.Count];
+                    else builder[i] = znaki[nowyindex];
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private string Odszyfruj(StringBuilder builder, int klucz)
+        {
+            for (int i = 0; i < builder.Length && klucz <= znaki.Count; i++)
+            {
+                if (znaki.Contains(builder[i]))
+                {
+                    int nowyindex = znaki.IndexOf(builder[i]) - klucz;
+                    if (nowyindex < 0) builder[i] = znaki[nowyindex + znaki.Count];
+                    else builder[i] = znaki[nowyindex];
+                }
+            }
+
+            return builder.ToString();
         }
 
         private void checkBoxSpacja_CheckedChanged(object sender, EventArgs e)
